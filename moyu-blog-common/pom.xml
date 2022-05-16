@@ -22,7 +22,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
+        <!-- MoYu-工具类 -->
+        <dependency>
+            <groupId>io.github.moyu-group</groupId>
+            <artifactId>moyu-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 

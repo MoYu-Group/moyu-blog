@@ -45,4 +45,33 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- MoYu-Group专有仓库
+        如果 maven 的 settings.xml 配置文件中 mirrorOf 配置为 <mirrorOf>*</mirrorOf> 则自定义仓库配置不会生效
+        需要改为 <mirrorOf>*,!moyu-group-snapshots,moyu-group-releases</mirrorOf>
+    -->
+    <repositories>
+        <repository>
+            <id>moyu-group-snapshots</id>
+            <name>moyu-group-repository-snapshots</name>
+            <url>https://maven.ffis.me/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>moyu-group-releases</id>
+            <name>moyu-group-repository-releases</name>
+            <url>https://maven.ffis.me/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 </project>
