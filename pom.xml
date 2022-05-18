@@ -28,6 +28,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <moyu-web.version>0.0.1-SNAPSHOT</moyu-web.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +42,12 @@
                 <groupId>org.moyu</groupId>
                 <artifactId>moyu-blog-service</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- MoYu Web开发能力快速集成 -->
+            <dependency>
+                <groupId>io.github.moyu-group</groupId>
+                <artifactId>moyu-web-autoconfiguers</artifactId>
+                <version>${moyu-web.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
