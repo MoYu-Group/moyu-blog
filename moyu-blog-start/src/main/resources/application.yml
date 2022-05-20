@@ -1,4 +1,6 @@
 #基础配置文件，存放公共配置
+server:
+  port: 8001
 spring:
   profiles:
     active: dev
