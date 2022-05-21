@@ -1,6 +1,5 @@
 package org.moyu.blog.controller;
 
-import io.github.moyugroup.util.PropertyUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +15,6 @@ public class ThymeleafController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
         mv.getModel().put("slogan", "hello world! Moyu-Group!");
-        System.out.println(PropertyUtil.getProperty("spring.application.version", null));
         return mv;
     }
 }
