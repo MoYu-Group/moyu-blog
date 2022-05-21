@@ -1,4 +1,4 @@
-package org.moyu.blog.start.controller;
+package org.moyu.blog.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
-    @GetMapping
+    @GetMapping("hello")
     public String helleWorld() {
         return "hello world !!!";
     }

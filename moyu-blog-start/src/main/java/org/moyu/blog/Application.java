@@ -1,4 +1,4 @@
-package org.moyu.blog.start;
+package org.moyu.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
