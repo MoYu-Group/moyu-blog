@@ -1,0 +1,11 @@
+#开发环境配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456789
+    url: jdbc:mysql://localhost:3306/moyu_blog?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

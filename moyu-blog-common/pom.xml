@@ -17,7 +17,11 @@
             <groupId>io.github.moyu-group</groupId>
             <artifactId>moyu-web-autoconfiguers</artifactId>
         </dependency>
-
+        <dependency>
+            <!--spring data jpa 用以定义域对象-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
     </dependencies>
 
 
