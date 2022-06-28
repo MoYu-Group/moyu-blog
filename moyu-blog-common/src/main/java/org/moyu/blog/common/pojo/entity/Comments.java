@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import org.moyu.blog.common.constant.CommentStatus;
@@ -25,12 +26,32 @@ public class Comments extends BaseEntity {
     private String agent;
     private String comment;
     private Long likeNum;
+    @Column(name = "`order`")
     private Integer order;
     private CommentStatus status;
 
     public Comments() {
     }
 
+
+    public Comments(Long id, String createBy, String updateBy, LocalDateTime createTime,
+        LocalDateTime updateTime, Boolean isDeleted, Long ownerId, Long contentId,
+        Long userId, String userName, String url, String ip, String ipLocation, String agent,
+        String comment, Long likeNum, Integer order, CommentStatus status) {
+        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
+        this.ownerId = ownerId;
+        this.contentId = contentId;
+        this.userId = userId;
+        this.userName = userName;
+        this.url = url;
+        this.ip = ip;
+        this.ipLocation = ipLocation;
+        this.agent = agent;
+        this.comment = comment;
+        this.likeNum = likeNum;
+        this.order = order;
+        this.status = status;
+    }
 
     public Long getOwnerId() {
         return ownerId;
@@ -155,24 +176,5 @@ public class Comments extends BaseEntity {
             getUserName(),
             getUrl(), getIp(), getIpLocation(), getAgent(), getComment(), getLikeNum(), getOrder(),
             getStatus());
-    }
-
-    public Comments(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted, Long ownerId, Long contentId,
-        Long userId, String userName, String url, String ip, String ipLocation, String agent,
-        String comment, Long likeNum, Integer order, CommentStatus status) {
-        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
-        this.ownerId = ownerId;
-        this.contentId = contentId;
-        this.userId = userId;
-        this.userName = userName;
-        this.url = url;
-        this.ip = ip;
-        this.ipLocation = ipLocation;
-        this.agent = agent;
-        this.comment = comment;
-        this.likeNum = likeNum;
-        this.order = order;
-        this.status = status;
     }
 }

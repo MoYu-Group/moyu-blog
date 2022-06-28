@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -19,24 +20,12 @@ public class ContentElement extends BaseEntity {
     private String categoryName;
     private String shortName;
     @Lob
+    @Column(name = "`desc`")
     private String desc;
-
+    @Column(name = "`order`")
     private Integer order;
     private String tagName;
     private ElementType type;
-
-    @Override
-    public String toString() {
-        return "ContentElement{" +
-            "userId=" + userId +
-            ", categoryName='" + categoryName + '\'' +
-            ", shortName='" + shortName + '\'' +
-            ", desc='" + desc + '\'' +
-            ", order=" + order +
-            ", tagName='" + tagName + '\'' +
-            ", type=" + type +
-            "} " + super.toString();
-    }
 
     public ContentElement(Long id, String createBy, String updateBy, LocalDateTime createTime,
         LocalDateTime updateTime, Boolean isDeleted, Long userId, String categoryName,
@@ -49,6 +38,22 @@ public class ContentElement extends BaseEntity {
         this.order = order;
         this.tagName = tagName;
         this.type = type;
+    }
+
+    public ContentElement() {
+    }
+
+    @Override
+    public String toString() {
+        return "ContentElement{" +
+            "userId=" + userId +
+            ", categoryName='" + categoryName + '\'' +
+            ", shortName='" + shortName + '\'' +
+            ", desc='" + desc + '\'' +
+            ", order=" + order +
+            ", tagName='" + tagName + '\'' +
+            ", type=" + type +
+            "} " + super.toString();
     }
 
     @Override
@@ -72,8 +77,5 @@ public class ContentElement extends BaseEntity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), userId, categoryName, shortName, desc, order, tagName,
             type);
-    }
-
-    public ContentElement() {
     }
 }

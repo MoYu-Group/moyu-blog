@@ -1,9 +1,13 @@
 package org.moyu.blog.common.pojo.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import org.moyu.blog.common.constant.ContentsStatus;
+import org.moyu.blog.common.constant.ContentsType;
 
 /**
  * @author fuhaixin
@@ -20,10 +24,11 @@ public class Contents extends BaseEntity {
     @Lob
     private String content;
     private String cover;
+    @Column(name = "`order`")
     private Integer order;
     private String template;
-    private Integer type;
-    private Integer status;
+    private ContentsType type;
+    private ContentsStatus status;
     private String password;
     private Long commentsNum;
     private Long likeNUm;
@@ -33,10 +38,13 @@ public class Contents extends BaseEntity {
     public Contents() {
     }
 
-    public Contents(Long userId, String title, String shortName, String content, String cover,
-        Integer order, String template, Integer type, Integer status, String password,
-        Long commentsNum,
-        Long likeNUm, Boolean allowComment, Boolean allowFeed) {
+    public Contents(Long id, String createBy, String updateBy, LocalDateTime createTime,
+        LocalDateTime updateTime, Boolean isDeleted, Long userId, String title, String shortName,
+        String content, String cover, Integer order, String template, ContentsType type,
+        ContentsStatus status, String password, Long commentsNum, Long likeNUm,
+        Boolean allowComment,
+        Boolean allowFeed) {
+        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
         this.userId = userId;
         this.title = title;
         this.shortName = shortName;
@@ -53,6 +61,13 @@ public class Contents extends BaseEntity {
         this.allowFeed = allowFeed;
     }
 
+    public ContentsType getType() {
+        return type;
+    }
+
+    public void setType(ContentsType type) {
+        this.type = type;
+    }
 
     public Long getUserId() {
         return userId;
@@ -110,19 +125,12 @@ public class Contents extends BaseEntity {
         this.template = template;
     }
 
-    public Integer getType() {
-        return type;
-    }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getStatus() {
+    public ContentsStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ContentsStatus status) {
         this.status = status;
     }
 
