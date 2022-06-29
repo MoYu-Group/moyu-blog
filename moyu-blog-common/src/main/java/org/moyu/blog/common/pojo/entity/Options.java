@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -13,9 +14,14 @@ import javax.persistence.Table;
 @Table
 public class Options extends BaseEntity {
 
+    @Basic(optional = false)
 
     private Long userId;
+    @Basic(optional = false)
+
     private String name;
+    @Basic(optional = false)
+
     private String value;
 
     @Override

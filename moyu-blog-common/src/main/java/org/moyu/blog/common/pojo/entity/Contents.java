@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
@@ -18,22 +19,37 @@ import org.moyu.blog.common.constant.ContentsType;
 @Table
 public class Contents extends BaseEntity {
 
+    @Basic(optional = false)
     private Long userId;
+    @Basic(optional = false)
     private String title;
+    @Basic(optional = false)
     private String shortName;
+    @Basic(optional = false)
     @Lob
     private String content;
+    @Basic(optional = false)
     private String cover;
+    @Basic(optional = false)
     @Column(name = "`order`")
     private Integer order;
+    @Basic(optional = false)
     private String template;
+    @Basic(optional = false)
     private ContentsType type;
+    @Basic(optional = false)
     private ContentsStatus status;
+    @Basic(optional = false)
     private String password;
+    @Basic(optional = false)
     private Long commentsNum;
+    @Basic(optional = false)
     private Long likeNUm;
+    @Basic(optional = false)
     private Boolean allowComment = Boolean.FALSE;
+    @Basic(optional = false)
     private Boolean allowFeed = Boolean.FALSE;
+
 
     public Contents() {
     }

@@ -3,6 +3,7 @@ package org.moyu.blog.common.pojo.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,18 +38,23 @@ public class BaseEntity implements Serializable {
         name = "snowflake_generator",
         strategy = "org.moyu.blog.common.jpa.id.SnowflakeIdGenerator"
     )
+    @Basic(optional = false)
     private Long id;
     @CreatedBy
     private String createBy;
     @LastModifiedBy
     private String updateBy;
     @CreatedDate
+    @Basic(optional = false)
+
     private LocalDateTime createTime;
     @LastModifiedDate
+    @Basic(optional = false)
     private LocalDateTime updateTime;
     /**
      * Todo 在BaseRepository中填入逻辑删除功能
      */
+    @Basic(optional = false)
     private Boolean isDeleted = Boolean.FALSE;
 
     public BaseEntity() {

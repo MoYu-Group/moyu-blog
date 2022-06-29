@@ -1,18 +1,18 @@
 package org.moyu.blog;
 
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.moyu.blog.common.OptionsRepository;
-import org.moyu.blog.common.pojo.entity.Options;
+import org.moyu.blog.common.TagRepository;
+import org.moyu.blog.common.pojo.entity.CATEGORY;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ApplicationTests {
 
+
     @Autowired
-    OptionsRepository repository;
+    TagRepository tagRepository;
 
     @Test
     void contextLoads() {
@@ -24,12 +24,17 @@ class ApplicationTests {
     }
 
     @Test
-    void testMapper() {
-        var options = new Options();
-        options.setName("测试数据3");
-        repository.save(options);
-        repository.findById(options.getId());
-        Assertions.assertNotNull(options.getCreateTime());
+    void testInheritance() {
+        var tag = new CATEGORY();
+        tag.setShortName("测试简称");
+        tag.setName("测试标签");
+        tag.setDesc("测试描述");
+        tag.setOrder(1);
+//        entityManager.persist(tag);
+        tagRepository.save(tag);
+        var tagOptional = tagRepository.findById(tag.getId());
+        var tagCase = tagOptional.orElseThrow(() -> new RuntimeException("查询失败"));
+//        assertThat(tagCase.getType().getCode()).isEqualTo(ElementType.TAG.getCode());
 
     }
 }

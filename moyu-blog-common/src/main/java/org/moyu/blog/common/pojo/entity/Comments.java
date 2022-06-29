@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,18 +17,35 @@ import org.moyu.blog.common.constant.CommentStatus;
 @Entity
 public class Comments extends BaseEntity {
 
+    @Basic(optional = false)
     private Long ownerId;
+    @Basic(optional = false)
     private Long contentId;
+    @Basic(optional = false)
     private Long userId;
+    @Basic(optional = false)
     private String userName;
+    @Basic(optional = false)
+
     private String url;
+    @Basic(optional = false)
+
     private String ip;
+    @Basic(optional = false)
+
     private String ipLocation;
+    @Basic(optional = false)
     private String agent;
+    @Basic(optional = false)
+
     private String comment;
+    @Basic(optional = false)
+
     private Long likeNum;
     @Column(name = "`order`")
+    @Basic(optional = false)
     private Integer order;
+    @Basic(optional = false)
     private CommentStatus status;
 
     public Comments() {
@@ -154,13 +172,12 @@ public class Comments extends BaseEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Comments)) {
+        if (!(o instanceof Comments comments)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-        Comments comments = (Comments) o;
         return getOwnerId().equals(comments.getOwnerId()) && getContentId().equals(
             comments.getContentId()) && getUserId().equals(comments.getUserId())
             && getUserName().equals(comments.getUserName()) && getUrl().equals(comments.getUrl())

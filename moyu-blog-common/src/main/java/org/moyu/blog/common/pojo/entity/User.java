@@ -2,6 +2,7 @@ package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,37 +17,69 @@ public class User extends BaseEntity {
     /**
      * 用户名
      */
+    @Basic(optional = false)
+
     private String username;
     /**
      * 密码
      */
+    @Basic(optional = false)
+
     private String password;
     /**
      * 昵称
      */
+    @Basic(optional = false)
+
     private String nickname;
     /**
      * 邮箱
      */
+    @Basic(optional = false)
+
     private String mail;
     /**
      * 用户主页
      */
+    @Basic(optional = false)
+
     private String url;
     /**
      * 最后登录时间
      */
+    @Basic(optional = false)
+
     private LocalDateTime lastLoginTime;
     /**
      * 最后登录Ip
      */
+    @Basic(optional = false)
+
     private String lastLoginIp;
     /**
      * 最后登录位置
      */
+    @Basic(optional = false)
+
     private String ipLocation;
 
     public User() {
+    }
+
+    public User(Long id, String createBy, String updateBy, LocalDateTime createTime,
+        LocalDateTime updateTime, Boolean isDeleted, String username, String password,
+        String nickname,
+        String mail, String url, LocalDateTime lastLoginTime, String lastLoginIp,
+        String ipLocation) {
+        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.mail = mail;
+        this.url = url;
+        this.lastLoginTime = lastLoginTime;
+        this.lastLoginIp = lastLoginIp;
+        this.ipLocation = ipLocation;
     }
 
     @Override
@@ -135,22 +168,6 @@ public class User extends BaseEntity {
     }
 
     public void setIpLocation(String ipLocation) {
-        this.ipLocation = ipLocation;
-    }
-
-    public User(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted, String username, String password,
-        String nickname,
-        String mail, String url, LocalDateTime lastLoginTime, String lastLoginIp,
-        String ipLocation) {
-        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.mail = mail;
-        this.url = url;
-        this.lastLoginTime = lastLoginTime;
-        this.lastLoginIp = lastLoginIp;
         this.ipLocation = ipLocation;
     }
 }
