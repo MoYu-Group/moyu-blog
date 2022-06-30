@@ -3,8 +3,8 @@ package org.moyu.blog;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import org.moyu.blog.common.CommentsRepository;
-import org.moyu.blog.common.OptionsRepository;
+import org.moyu.blog.repository.CommentsRepository;
+import org.moyu.blog.repository.OptionsRepository;
 import org.moyu.blog.common.constant.CommentStatus;
 import org.moyu.blog.common.pojo.entity.Comments;
 import org.moyu.blog.common.pojo.entity.Options;
@@ -20,7 +20,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
  **/
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class JpaTests {
+ class JpaTests {
 
 
     @Autowired

@@ -1,9 +1,17 @@
 package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.moyu.blog.common.constant.FileSaveType;
 
@@ -14,23 +22,19 @@ import org.moyu.blog.common.constant.FileSaveType;
 @Entity
 @Table
 public class File extends BaseEntity {
-    @Basic(optional = false)
 
-    private Long contentId;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "file")
+    private Set<FileContentsRelationShip> fileContentsRelationShipSet = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private User user;
     @Basic(optional = false)
-
-    private Long userId;
-    @Basic(optional = false)
-
     private String name;
     @Basic(optional = false)
-
     private String path;
     @Basic(optional = false)
-
     private Integer size;
     @Basic(optional = false)
-
     private FileSaveType saveType;
 
     private String type;
@@ -39,12 +43,26 @@ public class File extends BaseEntity {
     public File() {
     }
 
-    public File(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted, Long contentId, Long userId, String name,
+    public File(Set<FileContentsRelationShip> fileContentsRelationShipSet, User user, String name,
         String path, Integer size, FileSaveType saveType, String type, String mimeType) {
+        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
+        this.user = user;
+        this.name = name;
+        this.path = path;
+        this.size = size;
+        this.saveType = saveType;
+        this.type = type;
+        this.mimeType = mimeType;
+    }
+
+    public File(Long id, String createBy, String updateBy, LocalDateTime createTime,
+        LocalDateTime updateTime, Boolean isDeleted,
+        Set<FileContentsRelationShip> fileContentsRelationShipSet, User user, String name,
+        String path,
+        Integer size, FileSaveType saveType, String type, String mimeType) {
         super(id, createBy, updateBy, createTime, updateTime, isDeleted);
-        this.contentId = contentId;
-        this.userId = userId;
+        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
+        this.user = user;
         this.name = name;
         this.path = path;
         this.size = size;
@@ -58,41 +76,45 @@ public class File extends BaseEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof File file)) {
+        if (!(o instanceof File)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-        return getContentId().equals(file.getContentId()) && getUserId().equals(file.getUserId())
-            && getName().equals(file.getName()) && getPath().equals(file.getPath())
-            && getSize().equals(
-            file.getSize()) && getSaveType() == file.getSaveType() && getType().equals(
-            file.getType())
-            && getMimeType().equals(file.getMimeType());
+        File file = (File) o;
+        return getFileContentsRelationShipSet().equals(file.getFileContentsRelationShipSet())
+            && getUser().equals(file.getUser()) && getName().equals(file.getName())
+            && getPath().equals(
+            file.getPath()) && getSize().equals(file.getSize())
+            && getSaveType() == file.getSaveType()
+            && getType().equals(file.getType()) && getMimeType().equals(file.getMimeType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getContentId(), getUserId(), getName(), getPath(),
-            getSize(), getSaveType(), getType(), getMimeType());
+        return Objects.hash(super.hashCode(), getFileContentsRelationShipSet(), getUser(),
+            getName(),
+            getPath(), getSize(), getSaveType(), getType(), getMimeType());
     }
 
-    public Long getContentId() {
-        return contentId;
+    public Set<FileContentsRelationShip> getFileContentsRelationShipSet() {
+        return fileContentsRelationShipSet;
     }
 
-    public void setContentId(Long contentId) {
-        this.contentId = contentId;
+    public void setFileContentsRelationShipSet(
+        Set<FileContentsRelationShip> fileContentsRelationShipSet) {
+        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 
     public String getName() {
         return name;
@@ -145,8 +167,8 @@ public class File extends BaseEntity {
     @Override
     public String toString() {
         return "File{" +
-            "contentId=" + contentId +
-            ", userId=" + userId +
+            "fileContentsRelationShipSet=" + fileContentsRelationShipSet +
+            ", user=" + user +
             ", name='" + name + '\'' +
             ", path='" + path + '\'' +
             ", size=" + size +

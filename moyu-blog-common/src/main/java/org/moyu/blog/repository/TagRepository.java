@@ -1,6 +1,6 @@
-package org.moyu.blog.common;
+package org.moyu.blog.repository;
 
-import org.moyu.blog.common.pojo.entity.CATEGORY;
+import org.moyu.blog.common.pojo.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @date 2022/6/29
  **/
 @Repository
-public interface TagRepository extends JpaRepository<CATEGORY, Long> {
+public interface TagRepository extends JpaRepository<Category, Long> {
 
 }
 

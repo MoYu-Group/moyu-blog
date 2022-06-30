@@ -3,7 +3,12 @@ package org.moyu.blog.common.pojo.entity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -14,42 +19,24 @@ import javax.persistence.Table;
 @Table
 public class Options extends BaseEntity {
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private User user;
     @Basic(optional = false)
-
-    private Long userId;
-    @Basic(optional = false)
-
     private String name;
     @Basic(optional = false)
-
     private String value;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Options options)) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        return getUserId().equals(options.getUserId()) && getName().equals(options.getName())
-            && getValue().equals(options.getValue());
+    public Options() {
+
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getUserId(), getName(), getValue());
+    public User getUser() {
+        return user;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -68,14 +55,40 @@ public class Options extends BaseEntity {
         this.value = value;
     }
 
-    public Options() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Options)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Options options = (Options) o;
+        return getUser().equals(options.getUser()) && getName().equals(options.getName())
+            && getValue().equals(options.getValue());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getUser(), getName(), getValue());
+    }
+
+    @Override
+    public String toString() {
+        return "Options{" +
+            "user=" + user +
+            ", name='" + name + '\'' +
+            ", value='" + value + '\'' +
+            "} " + super.toString();
     }
 
     public Options(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted, Long userId, String name, String value) {
+        LocalDateTime updateTime, Boolean isDeleted, User user, String name, String value) {
         super(id, createBy, updateBy, createTime, updateTime, isDeleted);
-        this.userId = userId;
+        this.user = user;
         this.name = name;
         this.value = value;
     }

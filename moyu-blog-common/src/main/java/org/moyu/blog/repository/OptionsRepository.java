@@ -1,4 +1,4 @@
-package org.moyu.blog.common;
+package org.moyu.blog.repository;
 
 import org.moyu.blog.common.pojo.entity.Options;
 import org.springframework.data.jpa.repository.JpaRepository;

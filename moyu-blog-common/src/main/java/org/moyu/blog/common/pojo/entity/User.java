@@ -1,9 +1,12 @@
 package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -14,54 +17,56 @@ import javax.persistence.Table;
 @Entity
 public class User extends BaseEntity {
 
+    @OneToMany(mappedBy = "user")
+    private  Set<File> fileSet = new HashSet<>();
     /**
      * 用户名
      */
     @Basic(optional = false)
-
     private String username;
     /**
      * 密码
      */
     @Basic(optional = false)
-
     private String password;
     /**
      * 昵称
      */
     @Basic(optional = false)
-
     private String nickname;
     /**
      * 邮箱
      */
     @Basic(optional = false)
-
     private String mail;
     /**
      * 用户主页
      */
     @Basic(optional = false)
-
     private String url;
     /**
      * 最后登录时间
      */
     @Basic(optional = false)
-
     private LocalDateTime lastLoginTime;
     /**
      * 最后登录Ip
      */
     @Basic(optional = false)
-
     private String lastLoginIp;
     /**
      * 最后登录位置
      */
     @Basic(optional = false)
-
     private String ipLocation;
+    @OneToMany(mappedBy = "user")
+    private Set<Contents> contentsSet = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Options> optionsSet = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Tag> tagSet = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<Category> categorySet = new HashSet<>();
 
     public User() {
     }
@@ -169,5 +174,45 @@ public class User extends BaseEntity {
 
     public void setIpLocation(String ipLocation) {
         this.ipLocation = ipLocation;
+    }
+
+    public Set<File> getFileSet() {
+        return fileSet;
+    }
+
+    public Set<Contents> getContentsSet() {
+        return contentsSet;
+    }
+
+    public void setContentsSet(Set<Contents> contentsSet) {
+        this.contentsSet = contentsSet;
+    }
+
+    public Set<Options> getOptionsSet() {
+        return optionsSet;
+    }
+
+    public void setOptionsSet(Set<Options> optionsSet) {
+        this.optionsSet = optionsSet;
+    }
+
+    public Set<Tag> getTagSet() {
+        return tagSet;
+    }
+
+    public void setTagSet(Set<Tag> tagSet) {
+        this.tagSet = tagSet;
+    }
+
+    public Set<Category> getCategorySet() {
+        return categorySet;
+    }
+
+    public void setFileSet(Set<File> fileSet) {
+        this.fileSet = fileSet;
+    }
+
+    public void setCategorySet(Set<Category> categorySet) {
+        this.categorySet = categorySet;
     }
 }

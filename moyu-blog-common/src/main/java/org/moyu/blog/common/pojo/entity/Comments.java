@@ -4,7 +4,12 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.moyu.blog.common.constant.CommentStatus;
 
@@ -19,8 +24,10 @@ public class Comments extends BaseEntity {
 
     @Basic(optional = false)
     private Long ownerId;
-    @Basic(optional = false)
-    private Long contentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contents_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Contents contents;
+
     @Basic(optional = false)
     private Long userId;
     @Basic(optional = false)
@@ -53,12 +60,12 @@ public class Comments extends BaseEntity {
 
 
     public Comments(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted, Long ownerId, Long contentId,
-        Long userId, String userName, String url, String ip, String ipLocation, String agent,
-        String comment, Long likeNum, Integer order, CommentStatus status) {
+        LocalDateTime updateTime, Boolean isDeleted, Long ownerId, Contents contents, Long userId,
+        String userName, String url, String ip, String ipLocation, String agent, String comment,
+        Long likeNum, Integer order, CommentStatus status) {
         super(id, createBy, updateBy, createTime, updateTime, isDeleted);
         this.ownerId = ownerId;
-        this.contentId = contentId;
+        this.contents = contents;
         this.userId = userId;
         this.userName = userName;
         this.url = url;
@@ -79,12 +86,12 @@ public class Comments extends BaseEntity {
         this.ownerId = ownerId;
     }
 
-    public Long getContentId() {
-        return contentId;
+    public Contents getContents() {
+        return contents;
     }
 
-    public void setContentId(Long contentId) {
-        this.contentId = contentId;
+    public void setContents(Contents contents) {
+        this.contents = contents;
     }
 
     public Long getUserId() {
@@ -178,18 +185,21 @@ public class Comments extends BaseEntity {
         if (!super.equals(o)) {
             return false;
         }
-        return getOwnerId().equals(comments.getOwnerId()) && getContentId().equals(
-            comments.getContentId()) && getUserId().equals(comments.getUserId())
-            && getUserName().equals(comments.getUserName()) && getUrl().equals(comments.getUrl())
-            && getIp().equals(comments.getIp()) && getIpLocation().equals(comments.getIpLocation())
-            && getAgent().equals(comments.getAgent()) && getComment().equals(comments.getComment())
-            && getLikeNum().equals(comments.getLikeNum()) && getOrder().equals(comments.getOrder())
+        return getOwnerId().equals(comments.getOwnerId()) && getContents().equals(
+            comments.getContents()) && getUserId().equals(comments.getUserId())
+            && getUserName().equals(
+            comments.getUserName()) && getUrl().equals(comments.getUrl()) && getIp().equals(
+            comments.getIp()) && getIpLocation().equals(comments.getIpLocation())
+            && getAgent().equals(
+            comments.getAgent()) && getComment().equals(comments.getComment())
+            && getLikeNum().equals(
+            comments.getLikeNum()) && getOrder().equals(comments.getOrder())
             && getStatus() == comments.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getOwnerId(), getContentId(), getUserId(),
+        return Objects.hash(super.hashCode(), getOwnerId(), getContents(), getUserId(),
             getUserName(),
             getUrl(), getIp(), getIpLocation(), getAgent(), getComment(), getLikeNum(), getOrder(),
             getStatus());
