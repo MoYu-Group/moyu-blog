@@ -9,3 +9,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
+# 增长了session的周期,建议关闭
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
+# 分页第一页

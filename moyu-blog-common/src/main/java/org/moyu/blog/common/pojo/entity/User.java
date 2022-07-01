@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,8 +18,8 @@ import javax.persistence.Table;
 @Entity
 public class User extends BaseEntity {
 
-    @OneToMany(mappedBy = "user")
-    private  Set<File> fileSet = new HashSet<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<File> fileSet = new HashSet<>();
     /**
      * 用户名
      */
@@ -59,13 +60,13 @@ public class User extends BaseEntity {
      */
     @Basic(optional = false)
     private String ipLocation;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Contents> contentsSet = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Options> optionsSet = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Tag> tagSet = new HashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Category> categorySet = new HashSet<>();
 
     public User() {
@@ -180,6 +181,10 @@ public class User extends BaseEntity {
         return fileSet;
     }
 
+    public void setFileSet(Set<File> fileSet) {
+        this.fileSet = fileSet;
+    }
+
     public Set<Contents> getContentsSet() {
         return contentsSet;
     }
@@ -208,11 +213,26 @@ public class User extends BaseEntity {
         return categorySet;
     }
 
-    public void setFileSet(Set<File> fileSet) {
-        this.fileSet = fileSet;
-    }
-
     public void setCategorySet(Set<Category> categorySet) {
         this.categorySet = categorySet;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+            "id = " + getId() + ", " +
+            "createBy = " + getCreateBy() + ", " +
+            "updateBy = " + getUpdateBy() + ", " +
+            "createTime = " + getCreateTime() + ", " +
+            "updateTime = " + getUpdateTime() + ", " +
+            "isDeleted = " + getDeleted() + ", " +
+            "username = " + getUsername() + ", " +
+            "password = " + getPassword() + ", " +
+            "nickname = " + getNickname() + ", " +
+            "mail = " + getMail() + ", " +
+            "url = " + getUrl() + ", " +
+            "lastLoginTime = " + getLastLoginTime() + ", " +
+            "lastLoginIp = " + getLastLoginIp() + ", " +
+            "ipLocation = " + getIpLocation() + ")";
     }
 }

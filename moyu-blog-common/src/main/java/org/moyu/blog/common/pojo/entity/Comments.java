@@ -1,7 +1,9 @@
 package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
@@ -10,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.moyu.blog.common.constant.CommentStatus;
 
@@ -17,9 +20,9 @@ import org.moyu.blog.common.constant.CommentStatus;
  * @author fuhaixin
  * @date 2022/6/28
  **/
-
 @Table
 @Entity
+
 public class Comments extends BaseEntity {
 
     @Basic(optional = false)
@@ -54,10 +57,14 @@ public class Comments extends BaseEntity {
     private Integer order;
     @Basic(optional = false)
     private CommentStatus status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private Comments parentComments;
+    @OneToMany(mappedBy = "parentComments", fetch = FetchType.LAZY)
+    private Set<Comments> childrenComments = new HashSet<>();
 
     public Comments() {
     }
-
 
     public Comments(Long id, String createBy, String updateBy, LocalDateTime createTime,
         LocalDateTime updateTime, Boolean isDeleted, Long ownerId, Contents contents, Long userId,
@@ -76,6 +83,14 @@ public class Comments extends BaseEntity {
         this.likeNum = likeNum;
         this.order = order;
         this.status = status;
+    }
+
+    public Comments getParentComments() {
+        return parentComments;
+    }
+
+    public void setParentComments(Comments parentComment) {
+        this.parentComments = parentComment;
     }
 
     public Long getOwnerId() {
@@ -203,5 +218,36 @@ public class Comments extends BaseEntity {
             getUserName(),
             getUrl(), getIp(), getIpLocation(), getAgent(), getComment(), getLikeNum(), getOrder(),
             getStatus());
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+            "id = " + getId() + ", " +
+            "createBy = " + getCreateBy() + ", " +
+            "updateBy = " + getUpdateBy() + ", " +
+            "createTime = " + getCreateTime() + ", " +
+            "updateTime = " + getUpdateTime() + ", " +
+            "isDeleted = " + getDeleted() + ", " +
+            "ownerId = " + getOwnerId() + ", " +
+            "userId = " + getUserId() + ", " +
+            "userName = " + getUserName() + ", " +
+            "url = " + getUrl() + ", " +
+            "ip = " + getIp() + ", " +
+            "ipLocation = " + getIpLocation() + ", " +
+            "agent = " + getAgent() + ", " +
+            "comment = " + getComment() + ", " +
+            "likeNum = " + getLikeNum() + ", " +
+            "order = " + getOrder() + ", " +
+            "status = " + getStatus() + ")";
+    }
+
+    public Set<Comments> getChildrenComments() {
+        return childrenComments;
+    }
+
+    public void setChildrenComments(
+        Set<Comments> childrenComments) {
+        this.childrenComments = childrenComments;
     }
 }

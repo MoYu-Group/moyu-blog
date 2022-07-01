@@ -18,7 +18,6 @@ import org.moyu.blog.common.constant.ElementType.ContentElementType;
  * @author fuhaixin
  * @date 2022/6/29
  **/
-
 @Entity
 @DiscriminatorValue(value = ContentElementType.TAG)
 public class Tag extends ContentElement {
@@ -69,15 +68,6 @@ public class Tag extends ContentElement {
     }
 
     @Override
-    public String toString() {
-        return "Tag{" +
-            "parentTag=" + parentTag +
-            ", childrenTags=" + childrenTags +
-            ", tagContentsRelationShips=" + tagContentsRelationShips +
-            "} " + super.toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -107,5 +97,19 @@ public class Tag extends ContentElement {
     }
 
 
-
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+            "id = " + getId() + ", " +
+            "createBy = " + getCreateBy() + ", " +
+            "updateBy = " + getUpdateBy() + ", " +
+            "createTime = " + getCreateTime() + ", " +
+            "updateTime = " + getUpdateTime() + ", " +
+            "isDeleted = " + getDeleted() + ", " +
+            "name = " + getName() + ", " +
+            "shortName = " + getShortName() + ", " +
+            "desc = " + getDesc() + ", " +
+            "order = " + getOrder() + ", " +
+            "parentTag = " + getParentTag() + ")";
+    }
 }
