@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "content_element")
-public class ContentElement {
+@Table(name = "contents")
+public class Content {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,23 +36,45 @@ public class ContentElement {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "name", nullable = false, length = 32)
-    private String name;
+    @Column(name = "title", nullable = false, length = 128)
+    private String title;
 
-    @Column(name = "short_name", nullable = false, length = 32)
+    @Column(name = "short_name", nullable = false, length = 128)
     private String shortName;
 
-    @Column(name = "`desc`", nullable = false, length = 128)
-    private String desc;
+    @Lob
+    @Column(name = "content", nullable = false)
+    private String content;
 
-    @Column(name = "parent_id", nullable = false)
-    private Long parentId;
+    @Column(name = "cover", nullable = false)
+    private String cover;
 
     @Column(name = "`order`", nullable = false)
     private Integer order;
 
+    @Column(name = "template", nullable = false)
+    private String template;
+
     @Column(name = "type", nullable = false)
     private Integer type;
+
+    @Column(name = "status", nullable = false)
+    private Integer status;
+
+    @Column(name = "password", length = 64)
+    private String password;
+
+    @Column(name = "comments_num", nullable = false)
+    private Integer commentsNum;
+
+    @Column(name = "like_num", nullable = false)
+    private Integer likeNum;
+
+    @Column(name = "allow_comment", nullable = false)
+    private Integer allowComment;
+
+    @Column(name = "allow_feed", nullable = false)
+    private Integer allowFeed;
 
     public Long getId() {
         return id;
@@ -109,12 +132,12 @@ public class ContentElement {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getShortName() {
@@ -125,20 +148,20 @@ public class ContentElement {
         this.shortName = shortName;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getContent() {
+        return content;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public String getCover() {
+        return cover;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public Integer getOrder() {
@@ -149,12 +172,68 @@ public class ContentElement {
         this.order = order;
     }
 
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
     public Integer getType() {
         return type;
     }
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getCommentsNum() {
+        return commentsNum;
+    }
+
+    public void setCommentsNum(Integer commentsNum) {
+        this.commentsNum = commentsNum;
+    }
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public Integer getAllowComment() {
+        return allowComment;
+    }
+
+    public void setAllowComment(Integer allowComment) {
+        this.allowComment = allowComment;
+    }
+
+    public Integer getAllowFeed() {
+        return allowFeed;
+    }
+
+    public void setAllowFeed(Integer allowFeed) {
+        this.allowFeed = allowFeed;
     }
 
 }

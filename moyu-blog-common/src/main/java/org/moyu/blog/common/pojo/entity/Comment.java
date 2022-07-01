@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +33,17 @@ public class User {
     @Column(name = "is_deleted", nullable = false)
     private Integer isDeleted;
 
-    @Column(name = "nickname", nullable = false, length = 32)
-    private String nickname;
+    @Column(name = "owner_id", nullable = false)
+    private Long ownerId;
 
-    @Column(name = "username", nullable = false, length = 32)
-    private String username;
+    @Column(name = "content_id", nullable = false)
+    private Long contentId;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @Column(name = "user_name", nullable = false, length = 64)
+    private String userName;
 
     @Column(name = "mail", nullable = false)
     private String mail;
@@ -47,14 +51,30 @@ public class User {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @Column(name = "last_login_time", nullable = false)
-    private Instant lastLoginTime;
-
-    @Column(name = "last_login_ip", nullable = false, length = 64)
-    private String lastLoginIp;
+    @Column(name = "ip", nullable = false, length = 64)
+    private String ip;
 
     @Column(name = "ip_location", nullable = false, length = 64)
     private String ipLocation;
+
+    @Column(name = "agent", nullable = false)
+    private String agent;
+
+    @Lob
+    @Column(name = "comment", nullable = false)
+    private String comment;
+
+    @Column(name = "like_num", nullable = false)
+    private Integer likeNum;
+
+    @Column(name = "`order`", nullable = false)
+    private Integer order;
+
+    @Column(name = "status", nullable = false)
+    private Integer status;
+
+    @Column(name = "parent_id", nullable = false)
+    private Long parentId;
 
     public Long getId() {
         return id;
@@ -104,28 +124,36 @@ public class User {
         this.isDeleted = isDeleted;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getContentId() {
+        return contentId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 
-    public String getPassword() {
-        return password;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getMail() {
@@ -144,20 +172,12 @@ public class User {
         this.url = url;
     }
 
-    public Instant getLastLoginTime() {
-        return lastLoginTime;
+    public String getIp() {
+        return ip;
     }
 
-    public void setLastLoginTime(Instant lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public String getIpLocation() {
@@ -166,6 +186,54 @@ public class User {
 
     public void setIpLocation(String ipLocation) {
         this.ipLocation = ipLocation;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Integer getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Integer likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
 }

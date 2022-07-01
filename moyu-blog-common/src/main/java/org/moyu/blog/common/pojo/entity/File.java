@@ -1,151 +1,67 @@
 package org.moyu.blog.common.pojo.entity;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import javax.persistence.Basic;
-import javax.persistence.ConstraintMode;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import org.moyu.blog.common.constant.FileSaveType;
 
-/**
- * @author fuhaixin
- * @date 2022/6/28
- **/
 @Entity
-@Table
-public class File extends BaseEntity {
+@Table(name = "file")
+public class File {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "file")
-    private Set<FileContentsRelationShip> fileContentsRelationShipSet = new HashSet<>();
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private User user;
-    @Basic(optional = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "create_by", nullable = false, length = 128)
+    private String createBy;
+
+    @Column(name = "update_by", nullable = false, length = 128)
+    private String updateBy;
+
+    @Column(name = "create_time", nullable = false)
+    private LocalDateTime createTime;
+
+    @Column(name = "update_time", nullable = false)
+    private LocalDateTime updateTime;
+
+    @Column(name = "is_deleted", nullable = false)
+    private Integer isDeleted;
+
+    @Column(name = "content_id", nullable = false)
+    private Long contentId;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    @Column(name = "name", nullable = false, length = 128)
     private String name;
-    @Basic(optional = false)
-    private String path;
-    @Basic(optional = false)
-    private Integer size;
-    @Basic(optional = false)
-    private FileSaveType saveType;
 
+    @Column(name = "path", nullable = false)
+    private String path;
+
+    @Column(name = "size", nullable = false)
+    private Integer size;
+
+    @Column(name = "save_type", nullable = false)
+    private Integer saveType;
+
+    @Column(name = "type", nullable = false, length = 32)
     private String type;
+
+    @Column(name = "mime_type", nullable = false, length = 32)
     private String mimeType;
 
-    public File() {
+    public String getMimeType() {
+        return mimeType;
     }
 
-    public File(Set<FileContentsRelationShip> fileContentsRelationShipSet, User user, String name,
-        String path, Integer size, FileSaveType saveType, String type, String mimeType) {
-        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
-        this.user = user;
-        this.name = name;
-        this.path = path;
-        this.size = size;
-        this.saveType = saveType;
-        this.type = type;
+    public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
-    }
-
-    public File(Long id, String createBy, String updateBy, LocalDateTime createTime,
-        LocalDateTime updateTime, Boolean isDeleted,
-        Set<FileContentsRelationShip> fileContentsRelationShipSet, User user, String name,
-        String path,
-        Integer size, FileSaveType saveType, String type, String mimeType) {
-        super(id, createBy, updateBy, createTime, updateTime, isDeleted);
-        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
-        this.user = user;
-        this.name = name;
-        this.path = path;
-        this.size = size;
-        this.saveType = saveType;
-        this.type = type;
-        this.mimeType = mimeType;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof File)) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        File file = (File) o;
-        return getFileContentsRelationShipSet().equals(file.getFileContentsRelationShipSet())
-            && getUser().equals(file.getUser()) && getName().equals(file.getName())
-            && getPath().equals(
-            file.getPath()) && getSize().equals(file.getSize())
-            && getSaveType() == file.getSaveType()
-            && getType().equals(file.getType()) && getMimeType().equals(file.getMimeType());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getFileContentsRelationShipSet(), getUser(),
-            getName(),
-            getPath(), getSize(), getSaveType(), getType(), getMimeType());
-    }
-
-    public Set<FileContentsRelationShip> getFileContentsRelationShipSet() {
-        return fileContentsRelationShipSet;
-    }
-
-    public void setFileContentsRelationShipSet(
-        Set<FileContentsRelationShip> fileContentsRelationShipSet) {
-        this.fileContentsRelationShipSet = fileContentsRelationShipSet;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public FileSaveType getSaveType() {
-        return saveType;
-    }
-
-    public void setSaveType(FileSaveType saveType) {
-        this.saveType = saveType;
     }
 
     public String getType() {
@@ -156,25 +72,100 @@ public class File extends BaseEntity {
         this.type = type;
     }
 
-    public String getMimeType() {
-        return mimeType;
+    public Integer getSaveType() {
+        return saveType;
     }
 
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setSaveType(Integer saveType) {
+        this.saveType = saveType;
     }
 
-    @Override
-    public String toString() {
-        return "File{" +
-            "fileContentsRelationShipSet=" + fileContentsRelationShipSet +
-            ", user=" + user +
-            ", name='" + name + '\'' +
-            ", path='" + path + '\'' +
-            ", size=" + size +
-            ", saveType=" + saveType +
-            ", type='" + type + '\'' +
-            ", mimeType='" + mimeType + '\'' +
-            "} " + super.toString();
+    public Integer getSize() {
+        return size;
     }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
 }
