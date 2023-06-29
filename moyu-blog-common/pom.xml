@@ -3,22 +3,23 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
+    <groupId>io.github.moyu-group</groupId>
     <artifactId>moyu-blog</artifactId>
-    <groupId>org.moyu</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.moyu-group.moyu-blog</groupId>
   <artifactId>moyu-blog-common</artifactId>
 
   <dependencies>
     <!-- MoYu Web开发能力快速集成 -->
     <dependency>
-      <groupId>io.github.moyu-group</groupId>
+      <groupId>io.github.moyu-group.moyu-framework</groupId>
       <artifactId>moyu-web-autoconfiguers</artifactId>
     </dependency>
+    <!--spring data jpa 用以定义域对象-->
     <dependency>
-      <!--spring data jpa 用以定义域对象-->
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>

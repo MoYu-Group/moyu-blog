@@ -3,17 +3,18 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>io.github.moyu-group</groupId>
         <artifactId>moyu-blog</artifactId>
-        <groupId>org.moyu</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.moyu-group.moyu-blog</groupId>
     <artifactId>moyu-blog-service</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.moyu</groupId>
+            <groupId>io.github.moyu-group.moyu-blog</groupId>
             <artifactId>moyu-blog-common</artifactId>
         </dependency>
     </dependencies>

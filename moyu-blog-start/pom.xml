@@ -3,19 +3,20 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
+    <groupId>io.github.moyu-group</groupId>
     <artifactId>moyu-blog</artifactId>
-    <groupId>org.moyu</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.moyu-group.moyu-blog</groupId>
   <artifactId>moyu-blog-start</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
       <!--moyu-blog的业务层-->
-      <groupId>org.moyu</groupId>
+      <groupId>io.github.moyu-group.moyu-blog</groupId>
       <artifactId>moyu-blog-service</artifactId>
     </dependency>
     <!-- spring-boot-devtools -->
@@ -33,8 +34,8 @@
     </dependency>
     <!--mysql 驱动-->
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
